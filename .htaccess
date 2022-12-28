@@ -1,0 +1,9 @@
+# Este archivo lo que hace es que cuando un usuario solicita un archivo que no existe en la 
+# aplicación, entonces dicha solicitud será redirigida al index
+RewriteEngine On
+
+# Si la ruta no es un archivo existente, ni una carpeta
+# Reescribir al index
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.+?)/?$ index.php?url=$1 [L,QSA]
