@@ -102,13 +102,12 @@ class Conexion
         /* Se devuelven el número de filas afectadas en la última operación MySQL
         ya sea INSERT, UPDATE, REPLACE o DELETE.
         */
-        return $this->conexion->affected_rows();
+        return $this->conexion->affected_rows;
     }
 
+    // este método se usara para la operación INSERT
     public function idUltimaConsulta($consulta) {
         $results = $this->conexion->query($consulta);
-        $filas = $this->conexion->affected_rows();
-
         /*
         Con insert_id() devolvemos el ID generado por la última consulta (normalmente 
         INSERT) en una tabla con una columna que tenga el atributo AUTO_INCREMENT.
@@ -116,7 +115,7 @@ class Conexion
         modificada no tiene una columna con el atributo AUTO_INCREMENT, esta función 
         devolverá cero.
         */
-        return $this->conexion->insert_id();
+        return $this->conexion->insert_id;
     }
 }
 
