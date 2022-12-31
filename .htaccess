@@ -2,6 +2,16 @@
 # aplicación, entonces dicha solicitud será redirigida al index
 RewriteEngine On
 
+# estas líneas son colocadas para que no sea necesario poner la extensión .php al acceder a una página
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.*)$ $1.php
+
+# estas líneas son colocadas para que no sea necesario poner la extensión .html al acceder a una página
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.*)$ $1.html
+
 # Si la ruta no es un archivo existente, ni una carpeta
 # Reescribir al index
 RewriteCond %{REQUEST_FILENAME} !-f

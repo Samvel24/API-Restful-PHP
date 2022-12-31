@@ -11,26 +11,26 @@ class Respuesta
     pero se ha deshabilitado y no se puede usar para ese recurso.
     */
     public function error_405() {
-        $this->reponse['status'] = "error";
-        $this->reponse['result'] = array(
+        $this->response['status'] = "error";
+        $this->response['result'] = array(
             "error_id" => "405",
             "error_msg" => "Metodo no permitido"
         );
 
-        return $response;
+        return $this->response;
     }
 
     /*
     El código 200 indica que la solicitud se ha realizado correctamente
     */
     public function error_200($mensaje = "Datos incorrectos") {
-        $this->reponse['status'] = "error";
-        $this->reponse['result'] = array(
+        $this->response['status'] = "error";
+        $this->response['result'] = array(
             "error_id" => "200",
             "error_msg" => $mensaje
         );
 
-        return $response;
+        return $this->response;
     }
 
     /*
@@ -38,13 +38,13 @@ class Respuesta
     sintaxis incorrecta. El cliente NO DEBE repetir la solicitud sin modificaciones
     */
     public function error_400() {
-        $this->reponse['status'] = "error";
-        $this->reponse['result'] = array(
+        $this->response['status'] = "error";
+        $this->response['result'] = array(
             "error_id" => "400",
             "error_msg" => "Datos enviados incompletos o con formato incorrecto"
         );
 
-        return $response;
+        return $this->response;
     }
 }
 ?>
