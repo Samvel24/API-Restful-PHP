@@ -117,6 +117,20 @@ class Conexion
         */
         return $this->conexion->insert_id;
     }
+
+    /* En la base de datos la contraseña está encriptada (La encriptación o cifrado es un 
+    mecanismo de seguridad que permite modificar un mensaje de modo que su contenido sea 
+    ilegible, salvo para su destinatario) y en la API en la que se envía la contraseña
+    no está encriptada, entonces esta última se tiene que encriptar para verificar que sea 
+    igual a la que está en la base de datos. Para realizar lo anterior usamos el siguiente
+    método:
+    */
+    /* Solamente esta clase Conexion, la clase que herede de ella y la clase Padre podrá 
+    usar este método protected
+    */
+    protected function encriptar($cadena) { 
+        return md5($cadena); // Calcula el 'hash' md5 de un string
+    }
 }
 
 ?>

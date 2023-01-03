@@ -19,12 +19,20 @@ class Auth extends Conexion
             // sin error en los campos
             $usuario = $datos['usuario'];
             $password = $datos['password'];
+            // parent sirve para acceder a propiedades y métodos de la clase de la que estamos heredando
+            $password = parent::encriptar($password);
             $datos = $this->obtenerDatosUsuario($usuario);
 
             if ($datos != 0) {
-                // si existe el usuario
-                
-            } else {
+                // verificar si la contraseña ingresada es igual a la de la base de datos
+                if($password == $datos[0]['Password']) {
+
+                }
+                else {
+                    return $respuesta->error_200("El password es ivalido");
+                }
+            } 
+            else {
                 // no existe el usuario
                 return $respuesta->error_200("El usuario $usuario no existe");
             }
@@ -36,7 +44,8 @@ class Auth extends Conexion
         // parent sirve para acceder a propiedades y métodos de la clase de la que estamos heredando
         $datos = parent::obtenerDatos($consulta);
 
-        if (isset($datos[0]['UsuarioId'])) { // si existe el campo 'UsuarioId' en el arrelgo $datos
+        // verificamos si no es null el campo 'UsuarioId' en el arrelgo $datos
+        if (isset($datos[0]['UsuarioId'])) {
             return $datos;
         }
         else {
