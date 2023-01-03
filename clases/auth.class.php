@@ -26,7 +26,31 @@ class Auth extends Conexion
             if ($datos != 0) {
                 // verificar si la contraseña ingresada es igual a la de la base de datos
                 if($password == $datos[0]['Password']) {
+                    if ($datos[0]['Estado'] == "Activo") {
+                        // crear el token
+                        $token = $this->insertarToken($datos[0]['UsuarioId']);
 
+                        /* Si el valor devuelto por el método insertarToken() no es cero o 
+                        no es idéntico a cero (mismo tipo) entonces devolvemos el token 
+                        generado.Este programa funciona correctamente al usar el operador 
+                        No idéntico (!==)
+                        */
+                        if($token !== 0) {
+                            /* si se guardo el token entonces establecemos la llave 'result'
+                            de la respuesta (response) con el valor del token
+                            */
+                            $result = $respuesta->setKeyResultInResponse($token);
+                            return $result;
+                        }
+                        else {
+                            // error al guardar
+                            return $respuesta->error_500("Error interno, no se ha podido guardar el token");
+                        }
+                    } 
+                    else {
+                        // el usuario está inactivo
+                        return $respuesta->error_200("El usuario esta inactivo");    
+                    }
                 }
                 else {
                     return $respuesta->error_200("El password es ivalido");
@@ -47,6 +71,23 @@ class Auth extends Conexion
         // verificamos si no es null el campo 'UsuarioId' en el arrelgo $datos
         if (isset($datos[0]['UsuarioId'])) {
             return $datos;
+        }
+        else {
+            return 0;
+        }
+    }
+
+    private function insertarToken($usuarioId) {
+        $val = true;
+        $token = bin2hex(openssl_random_pseudo_bytes(16, $val));
+        $fecha = date("Y-m-d H:i");
+        $estado = "Activo";
+        $consulta = "INSERT INTO usuarios_token (UsuarioId, Token, Estado, Fecha)
+        VALUES ('$usuarioId', '$token', '$estado', '$fecha')";
+        
+        $filas = parent::filasAfectadas($consulta);
+        if($filas >= 1) {
+            return $token;
         }
         else {
             return 0;
