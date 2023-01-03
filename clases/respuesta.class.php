@@ -1,6 +1,7 @@
 <?php
 class Respuesta 
 {
+    // Descripción de códigos de estado HTTP: https://restfulapi.net/http-status-codes/
     private $response = [
         "status" => 'OK',
         "result" => array()
@@ -42,6 +43,29 @@ class Respuesta
         $this->response['result'] = array(
             "error_id" => "400",
             "error_msg" => "Datos enviados incompletos o con formato incorrecto"
+        );
+
+        return $this->response;
+    }
+
+    /* 
+    El código 500 indica que el servidor encontró una condición inesperada que le impidió
+    cumplir con la solicitud
+    */
+    public function error_500($mensaje = "Error interno del servidor") {
+        $this->response['status'] = "error";
+        $this->response['result'] = array(
+            "error_id" => "500",
+            "error_msg" => $mensaje
+        );
+
+        return $this->response;
+    }
+
+    // Establecemos la llave 'result' en el arreglo $response (atributo de esta clase)
+    public function setKeyResultInResponse($token) {
+        $this->response['result'] = array(
+            "token" => $token
         );
 
         return $this->response;
