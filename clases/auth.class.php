@@ -79,6 +79,11 @@ class Auth extends Conexion
 
     private function insertarToken($usuarioId) {
         $val = true;
+        /*
+        Con openssl_random_pseudo_bytes() generamos una cadena de bytes pseudo-aleatoria, con el 
+        número de bytes determinado por el parámetro length (16 en este caso) y con  bin2hex()
+        convertimos esos datos binarios en su representación hexadecimal
+        */
         $token = bin2hex(openssl_random_pseudo_bytes(16, $val));
         $fecha = date("Y-m-d H:i");
         $estado = "Activo";
