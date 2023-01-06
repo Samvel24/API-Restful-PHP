@@ -17,7 +17,14 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $pagina = $_GET['page'];
         $listaPacientes = $paciente->listaPacientes($pagina);
 
+        /*
+        Optimizamos la respuesta para la solicitud del listado de pacientes colocando el 
+        encabezado (header()) y el código de respuesta a tráves de la función 
+        http_response_code() 
+        */
+        header('Content-Type: application/json');
         echo json_encode($listaPacientes);
+        http_response_code(200);
     }
     /*
     En este caso, pasamos como parámetro URL a la variable 'id' que contiene un valor entero
@@ -27,7 +34,14 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $pacienteId = $_GET['id'];
         $datosPaciente = $paciente->obtenerPaciente($pacienteId);
         
+        /*
+        Optimizamos la respuesta para la solicitud de datos de un solo paciente colocando el 
+        encabezado (header()) y el código de respuesta a tráves de la función 
+        http_response_code() 
+        */
+        header('Content-Type: application/json');
         echo json_encode($datosPaciente);
+        http_response_code(200);
     }
 } 
 else if ($_SERVER['REQUEST_METHOD'] == "POST"){
