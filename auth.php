@@ -3,7 +3,7 @@ require_once 'clases/auth.class.php';
 require_once 'clases/respuesta.class.php';
 
 $auth = new Auth();
-$repuesta = new Respuesta();
+$respuesta = new Respuesta();
 
 /* Preguntamos al servidor si el método mediante el cual se envía la solicitud 
 (REQUEST_METHOD) es el método POST
@@ -68,7 +68,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 else {
     header('Content-Type: application/json');
-    $datosArray = $repuesta->error_405();
+    $datosArray = $respuesta->error_405();
 
     echo json_encode($datosArray);
 }
