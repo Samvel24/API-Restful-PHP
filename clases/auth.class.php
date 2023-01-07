@@ -39,7 +39,7 @@ class Auth extends Conexion
                             /* si se guardo el token entonces establecemos la llave 'result'
                             de la respuesta (response) con el valor del token
                             */
-                            $result = $respuesta->setKeyResultInResponse($token);
+                            $result = $respuesta->setKeyResultInResponse("token", $token);
                             return $result;
                         }
                         else {

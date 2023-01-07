@@ -63,9 +63,9 @@ class Respuesta
     }
 
     // Establecemos la llave 'result' en el arreglo $response (atributo de esta clase)
-    public function setKeyResultInResponse($token) {
+    public function setKeyResultInResponse($key, $value) {
         $this->response['result'] = array(
-            "token" => $token
+            $key => $value
         );
 
         return $this->response;
