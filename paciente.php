@@ -45,7 +45,30 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     }
 } 
 else if ($_SERVER['REQUEST_METHOD'] == "POST"){
-    echo "hola post";
+    /*
+    leemos los datos del cuerpo de la solicitud y los guardamos como una cadena de caracteres
+    en la variable postBody
+    */
+    $postBody = file_get_contents("php://input");
+
+    $datosArray = $paciente->guardarPaciente($postBody);
+    
+    /* 
+    Devolvemos una respuesta, colocando un encabezado, un código de respuesta y el arreglo
+    $response de la clase Respuesta que contiene el 'id' del último paciente agregado
+    */
+    header('Content-Type: application/json');
+
+    // si existe un campo llamado 'error_id' en el arreglo devuelto por el método login()
+    if (isset($datosArray["result"]["error_id"])) {
+        $reponseCode = $datosArray["result"]["error_id"];
+        http_response_code($reponseCode);
+    }
+    else {
+        http_response_code(200);
+    }
+
+    echo json_encode($datosArray);
 }
 else if ($_SERVER['REQUEST_METHOD'] == "PUT"){
     echo "hola put";
