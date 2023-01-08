@@ -81,7 +81,8 @@ else if ($_SERVER['REQUEST_METHOD'] == "PUT"){
     
     /* 
     Devolvemos una respuesta, colocando un encabezado, un código de respuesta y el arreglo
-    $response de la clase Respuesta que contiene el 'id' del último paciente agregado
+    $response de la clase Respuesta que contiene el 'id' del paciente que se ha modificado
+    recientemente
     */
     header('Content-Type: application/json');
 
