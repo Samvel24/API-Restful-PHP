@@ -97,7 +97,7 @@ class Paciente extends Conexion
         $respuesta = new Respuesta();
         $datos = json_decode($cadena, true);
 
-        // si no existe alguno de los campos en $datos: nombre, curp o correo
+        // si no existe el campo pacienteId en $datos:
         if(!isset($datos['pacienteId'])) {
             // entonces devolvemos el error 400
             return $respuesta->error_400();
