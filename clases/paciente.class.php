@@ -92,6 +92,55 @@ class Paciente extends Conexion
             return 0;
         }
     }
+
+    public function actualizarPaciente($cadena) {
+        $respuesta = new Respuesta();
+        $datos = json_decode($cadena, true);
+
+        // si no existe alguno de los campos en $datos: nombre, curp o correo
+        if(!isset($datos['pacienteId'])) {
+            // entonces devolvemos el error 400
+            return $respuesta->error_400();
+        }
+        else {
+            $this->pacienteid = $datos['pacienteId'];
+            if(isset($datos['nombre'])) { $this->nombre = $datos['nombre']; }
+            if(isset($datos['curp'])) { $this->curp = $datos['curp']; }
+            if(isset($datos['correo'])) { $this->correo = $datos['correo']; }
+            if(isset($datos['telefono'])) { $this->telefono = $datos['telefono']; }
+            if(isset($datos['direccion'])) { $this->direccion = $datos['direccion']; }
+            if(isset($datos['codigoPostal'])) { $this->codigoPostal = $datos['codigoPostal']; }
+            if(isset($datos['genero'])) { $this->genero = $datos['genero']; }
+            if(isset($datos['fechaNacimiento'])) { $this->fechaNacimiento = $datos['fechaNacimiento']; }
+
+            $filas = $this->modificarPaciente();
+
+            if($filas >= 1){
+                $res = $respuesta->setKeyResultInResponse("pacienteId", $this->pacienteid);
+                return $res;
+            }
+            else {
+                return $respuesta->error_400();
+            }
+        }
+    }
+
+    private function modificarPaciente(){
+        $consulta = "UPDATE " . $this->table . " SET Nombre ='" . $this->nombre . "',Direccion = '" 
+        . $this->direccion . "', CURP = '" . $this->curp . "', CodigoPostal = '" . $this->codigoPostal 
+        . "', Telefono = '" . $this->telefono . "', Genero = '" . $this->genero 
+        . "', FechaNacimiento = '" . $this->fechaNacimiento . "', Correo = '" . $this->correo 
+        . "' WHERE PacienteId = '" . $this->pacienteid . "'"; 
+
+        $filas = parent::filasAfectadas($consulta);
+
+        if($filas >= 1){
+            return $filas;
+        }
+        else{
+            return 0;
+        }
+    }
 }
 
 ?>
