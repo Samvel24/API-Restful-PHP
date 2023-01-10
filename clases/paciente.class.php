@@ -141,6 +141,46 @@ class Paciente extends Conexion
             return 0;
         }
     }
+
+    public function borrarPaciente($cadena) {
+        $respuesta = new Respuesta();
+        $datos = json_decode($cadena, true);
+
+        // si no existe el campo pacienteId en $datos:
+        if(!isset($datos['pacienteId'])) {
+            // entonces devolvemos el error 400
+            return $respuesta->error_400();
+        }
+        else {
+            $this->pacienteid = $datos['pacienteId'];
+
+            $filas = $this->eliminarPaciente();
+
+            if($filas >= 1){
+                $res = $respuesta->setKeyResultInResponse("pacienteId", $this->pacienteid);
+                return $res;
+            }
+            else {
+                return $respuesta->error_500();
+            }
+        }
+    }
+
+    private function eliminarPaciente() {
+        $consulta = "DELETE FROM " . $this->table . " WHERE PacienteId = '" 
+            . $this->pacienteid . "'";
+  
+        $filas = parent::filasAfectadas($consulta);
+        print_r($filas);
+
+        if($filas >= 1){
+            
+            return $filas;
+        }
+        else{
+            return 0;
+        }
+    }
 }
 
 ?>
