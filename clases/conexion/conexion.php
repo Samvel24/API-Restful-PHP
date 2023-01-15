@@ -39,6 +39,7 @@ class Conexion
         /* Para saber más sobre el constructor de la clase mysqli ver: 
         https://www.php.net/manual/es/mysqli.construct.php
         */
+        // Estamos declarando al campo de clase 'conexion' como un objeto de la clase mysqli
         $this->conexion = new mysqli($this->server, $this->user, $this->password, 
                                     $this->database, $this->port);
         if($this->conexion->connect_errno) {

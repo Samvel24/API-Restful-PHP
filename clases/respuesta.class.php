@@ -70,5 +70,19 @@ class Respuesta
 
         return $this->response;
     }
+
+    /*
+    El código 401 indica que la solicitud requiere información de autenticación del usuario.
+    El cliente PUEDE repetir la solicitud con un campo de encabezado de Autorización adecuado.
+    */
+    public function error_401($mensaje = "No autorizado") {
+        $this->response['status'] = "error";
+        $this->response['result'] = array(
+            "error_id" => "401",
+            "error_msg" => $mensaje
+        );
+
+        return $this->response;
+    }
 }
 ?>
