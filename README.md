@@ -1,6 +1,6 @@
 # Creating a Restful API with PHP (no frameworks)
  
-Creation of a RESTful API with PHP without using frameworks (With the help of the playlist https://youtube.com/playlist?list=PLIbWwxXce3VpvBT_O977da8XECEp-JTJt made by [Wilfredo Aleman](https://github.com/waleman)]
+Creation of a RESTful API with PHP without using frameworks (With the help of the playlist https://youtube.com/playlist?list=PLIbWwxXce3VpvBT_O977da8XECEp-JTJt made by [Wilfredo Aleman](https://github.com/waleman)])
  
 ### Previous requirements
 This project was run using the XAMPP control panel with the following features: Apache 2.4.46, MariaDB 10.4.1, and PHP 7.4.10
