@@ -28,18 +28,18 @@
     <div class="divbody">   
         <h3>Pacientes</h3>
         <code>
-           GET  /paciente?page=$numeroPagina
+           GET  /pacientes?page=$numeroPagina
            <br>
-           GET  /paciente?id=$idPaciente
+           GET  /pacientes?id=$idPaciente
         </code>
         <code>
-           POST  /paciente
+           POST  /pacientes
            <br> 
            {
             <br> 
                "nombre" : "",               -> REQUERIDO
                <br> 
-               "dni" : "",                  -> REQUERIDO
+               "curp" : "",                  -> REQUERIDO
                <br> 
                "correo":"",                 -> REQUERIDO
                <br> 
@@ -56,13 +56,13 @@
            }
         </code>
         <code>
-           PUT  /paciente
+           PUT  /pacientes
            <br> 
            {
             <br> 
                "nombre" : "",               
                <br> 
-               "dni" : "",                  
+               "curp" : "",                  
                <br> 
                "correo":"",                 
                <br> 
@@ -81,7 +81,7 @@
            }
         </code>
         <code>
-           DELETE  /paciente
+           DELETE  /pacientes
            <br> 
            {   
                <br>    
